@@ -1,6 +1,6 @@
 [![Status](https://img.shields.io/badge/Status-Active doing well & alive-blue.svg)](https://github.com/MKGitHub/MKBlockQueue)
-[![Version](https://img.shields.io/badge/Version-1.0.0-blue.svg)](https://github.com/MKGitHub/MKBlockQueue)
-[![Pod](https://img.shields.io/badge/pod-1.0.0-blue.svg)](https://github.com/MKGitHub/MKBlockQueue)
+[![Version](https://img.shields.io/badge/Version-1.0.1-blue.svg)](https://github.com/MKGitHub/MKBlockQueue)
+[![Pod](https://img.shields.io/badge/pod-1.0.1-blue.svg)](https://github.com/MKGitHub/MKBlockQueue)
 
 [![Platform](https://img.shields.io/badge/Platforms-macOS + iOS + tvOS + watchOS-blue.svg)](https://github.com/MKGitHub/MKBlockQueue)
 [![Swift](https://img.shields.io/badge/Swift Version-3 beta 1-blue.svg)](https://github.com/MKGitHub/MKBlockQueue)

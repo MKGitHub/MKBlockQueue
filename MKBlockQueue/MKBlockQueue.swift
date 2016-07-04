@@ -1,6 +1,6 @@
 //
 //  MKBlockQueue
-//  version 1.0.0
+//  version 1.0.1
 //
 //  Created by Mohsan Khan on 2016-01-26.
 //  Copyright © 2016 Mohsan Khan. All rights reserved.
@@ -81,7 +81,7 @@ final class MKBlockQueue:MKBlockQueueResponder
     private var mQueueIsRunning:Bool = false
 
     private var mBlocksArray:Array<MKBlockQueueBlockType>!
-    private var mQueueCompletedBlockType:MKBlockQueueCompletedBlockType!
+    private var mQueueCompletedBlockType:MKBlockQueueCompletedBlockType?
 
 
     // MARK:- Life Cycle
@@ -142,7 +142,7 @@ final class MKBlockQueue:MKBlockQueueResponder
         if (mCurrentRunningBlockNumber == mNumOfBlocks)
         {
             mQueueIsRunning = false
-            mQueueCompletedBlockType(dictionary:dictionary)
+            mQueueCompletedBlockType?(dictionary:dictionary)
             return
         }
 

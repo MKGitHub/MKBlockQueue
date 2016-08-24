@@ -1,15 +1,14 @@
 //
-//  MKBlockQueue Example Project
-//
-//  Created by Mohsan Khan on 2016-01-26.
+//  MKBlockQueue - Example Project
 //  Copyright © 2016 Mohsan Khan. All rights reserved.
 //
-
 
 //
 //  https://github.com/MKGitHub/MKBlockQueue
 //  http://www.xybernic.com
 //  http://www.khanofsweden.com
+//
+
 //
 //  Copyright 2016 Mohsan Khan
 //
@@ -45,10 +44,10 @@ class ViewController:NSViewController
     // MARK:- Example
 
 
-    private func runExample()
+    fileprivate func runExample()
     {
         // create the dictionary that will be sent to the blocks
-        var myDictionary:Dictionary<String, AnyObject> = Dictionary<String, AnyObject>()
+        var myDictionary:Dictionary<String, Any> = Dictionary<String, Any>()
         myDictionary["InitialKey"] = "InitialValue"
 
         // create block queue
@@ -58,34 +57,53 @@ class ViewController:NSViewController
         // block 1
         let b1:MKBlockQueueBlockType =
         {
-            (blockQueueObserver:MKBlockQueueObserver, dictionary:inout Dictionary<String, AnyObject>) in
+            (blockQueueObserver:MKBlockQueueObserver, dictionary:inout Dictionary<String, Any>) in
 
-            // test calling on main thread, after a delay
-            // this has nothing to do with the blocks/queue
-            DispatchQueue.main.after(when:DispatchTime.now() + 1.0, execute:
-            {
-                print("        Block 1 started with dictionary: \(dictionary)")
-                dictionary["Block1Key"] = "Block1Value"
+            print("Block 1 started with dictionary: \(dictionary)")
+            dictionary["Block1Key"] = "Block1Value"
 
-                // tell that this block is now completed
-                blockQueueObserver.blockCompleted(&dictionary)
-            })
+            // tell this block is now completed
+            blockQueueObserver.blockCompleted(with:&dictionary)
+
         }
+
 
         // block 2
         let b2:MKBlockQueueBlockType =
         {
-            (blockQueueObserver:MKBlockQueueObserver, dictionary:inout Dictionary<String, AnyObject>) in
+            (blockQueueObserver:MKBlockQueueObserver, dictionary:inout Dictionary<String, Any>) in
 
-            // test calling on global background queue, after a delay
-            // this has nothing to do with the blocks/queue
-            DispatchQueue.global(attributes:DispatchQueue.GlobalAttributes.qosBackground).after(when:DispatchTime.now() + 1.0, execute:
+            var copyOfDictionary:Dictionary<String, Any> = dictionary
+
+            // test calling on main thread, async, with delay
+            DispatchQueue.main.asyncAfter(deadline:(.now() + .seconds(1)), execute:
             {
-                print("        Block 2 started with dictionary: \(dictionary)")
-                dictionary["Block2Key"] = "Block2Value"
+                print("Block 2 started with dictionary: \(copyOfDictionary)")
 
-                // tell that this block is now completed
-                blockQueueObserver.blockCompleted(&dictionary)
+                copyOfDictionary["Block2Key"] = "Block2Value"
+
+                // tell this block is now completed
+                blockQueueObserver.blockCompleted(with:&copyOfDictionary)
+            })
+        }
+
+
+        // block 3
+        let b3:MKBlockQueueBlockType =
+        {
+            (blockQueueObserver:MKBlockQueueObserver, dictionary:inout Dictionary<String, Any>) in
+
+            var copyOfDictionary:Dictionary<String, Any> = dictionary
+
+            // test calling on global background queue, async, with delay
+            DispatchQueue.global(qos:.background).asyncAfter(deadline:(.now() + .seconds(1)), execute:
+            {
+                print("Block 3 started with dictionary: \(copyOfDictionary)")
+
+                copyOfDictionary["Block3Key"] = "Block3Value"
+
+                // tell this block is now completed
+                blockQueueObserver.blockCompleted(with:&copyOfDictionary)
             })
         }
 
@@ -93,18 +111,19 @@ class ViewController:NSViewController
         // add blocks to the queue
         myBlockQueue.addBlock(b1)
         myBlockQueue.addBlock(b2)
+        myBlockQueue.addBlock(b3)
 
         // add queue completion block for the queue
         myBlockQueue.queueCompletedBlock(
         {
-            (dictionary:Dictionary<String, AnyObject>) in
-            print("        Queue completed with dictionary: \(dictionary)")
+            (dictionary:Dictionary<String, Any>) in
+            print("Queue completed with dictionary: \(dictionary)")
         })
 
 
         // run queue
-        print("        Queue starting with dictionary: \(myDictionary)")
-        myBlockQueue.run(&myDictionary)
+        print("Queue starting with dictionary: \(myDictionary)")
+        myBlockQueue.run(with:&myDictionary)
     }
 }
 

@@ -1,15 +1,14 @@
 //
-//  MKBlockQueue Example Project
-//
-//  Created by Mohsan Khan on 2016-01-26.
+//  MKBlockQueue - Example Project
 //  Copyright © 2016 Mohsan Khan. All rights reserved.
 //
-
 
 //
 //  https://github.com/MKGitHub/MKBlockQueue
 //  http://www.xybernic.com
 //  http://www.khanofsweden.com
+//
+
 //
 //  Copyright 2016 Mohsan Khan
 //

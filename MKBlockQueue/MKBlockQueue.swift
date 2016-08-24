@@ -1,16 +1,14 @@
 //
 //  MKBlockQueue
-//  version 1.0.1
-//
-//  Created by Mohsan Khan on 2016-01-26.
 //  Copyright © 2016 Mohsan Khan. All rights reserved.
 //
-
 
 //
 //  https://github.com/MKGitHub/MKBlockQueue
 //  http://www.xybernic.com
 //  http://www.khanofsweden.com
+//
+
 //
 //  Copyright 2016 Mohsan Khan
 //
@@ -35,9 +33,9 @@ import Foundation
     ///
     final class MKBlockQueueObserver
     {
-        private var mBlockQueueResponder:MKBlockQueueResponder!
+        fileprivate var mBlockQueueResponder:MKBlockQueueResponder!
 
-        init(blockQueue:MKBlockQueue)
+        init(with blockQueue:MKBlockQueue)
         {
             mBlockQueueResponder = blockQueue
         }
@@ -48,9 +46,9 @@ import Foundation
             mBlockQueueResponder = nil
         }
 
-        func blockCompleted(_ dictionary:inout Dictionary<String, AnyObject>)
+        func blockCompleted(with dictionary:inout Dictionary<String, Any>)
         {
-            mBlockQueueResponder.blockCompletionTriggered(&dictionary)
+            mBlockQueueResponder.blockCompletionTriggered(with:&dictionary)
         }
     }
 
@@ -58,16 +56,16 @@ import Foundation
     ///
     /// Type aliases.
     ///
-    typealias MKBlockQueueBlockType = (blockQueueObserver:MKBlockQueueObserver, dictionary:inout Dictionary<String, AnyObject>) -> Void
-    typealias MKBlockQueueCompletedBlockType = (dictionary:Dictionary<String, AnyObject>) -> Void
+    typealias MKBlockQueueBlockType = (_ blockQueueObserver:MKBlockQueueObserver, _ dictionary:inout Dictionary<String, Any>) -> Void
+    typealias MKBlockQueueCompletedBlockType = (_ dictionary:Dictionary<String, Any>) -> Void
 
 
     ///
     /// Responder protocol.
     ///
-    private protocol MKBlockQueueResponder:class
+    fileprivate protocol MKBlockQueueResponder:class
     {
-        func blockCompletionTriggered(_ dictionary:inout Dictionary<String, AnyObject>)
+        func blockCompletionTriggered(with dictionary:inout Dictionary<String, Any>)
     }
 
 
@@ -76,12 +74,12 @@ import Foundation
 ///
 final class MKBlockQueue:MKBlockQueueResponder
 {
-    private var mNumOfBlocks:Int = 0
-    private var mCurrentRunningBlockNumber:Int = 0
-    private var mQueueIsRunning:Bool = false
+    fileprivate var mNumOfBlocks:Int = 0
+    fileprivate var mCurrentRunningBlockNumber:Int = 0
+    fileprivate var mQueueIsRunning:Bool = false
 
-    private var mBlocksArray:Array<MKBlockQueueBlockType>!
-    private var mQueueCompletedBlockType:MKBlockQueueCompletedBlockType?
+    fileprivate var mBlocksArray:Array<MKBlockQueueBlockType>!
+    fileprivate var mQueueCompletedBlockType:MKBlockQueueCompletedBlockType?
 
 
     // MARK:- Life Cycle
@@ -112,29 +110,29 @@ final class MKBlockQueue:MKBlockQueueResponder
     ///
     /// Run the first block with a dictionary.
     ///
-    func run(_ dictionary:inout Dictionary<String, AnyObject>)
+    func run(with dictionary:inout Dictionary<String, Any>)
     {
         guard (mQueueIsRunning == false) else { fatalError("Queue is already running, can't start the queue again!") }
 
         mQueueIsRunning = true
 
-        runNextBlock(&dictionary)
+        runNextBlock(with:&dictionary)
     }
 
 
     // MARK:- MKBlockQueueResponder
 
 
-    private func blockCompletionTriggered(_ dictionary:inout Dictionary<String, AnyObject>)
+    fileprivate func blockCompletionTriggered(with dictionary:inout Dictionary<String, Any>)
     {
-        runNextBlock(&dictionary)
+        runNextBlock(with:&dictionary)
     }
 
 
     // MARK:- Private
 
 
-    private func runNextBlock(_ dictionary:inout Dictionary<String, AnyObject>)
+    fileprivate func runNextBlock(with dictionary:inout Dictionary<String, Any>)
     {
         guard (mBlocksArray.count > 0) else { fatalError("There are no blocks in the queue to run!") }
 
@@ -142,7 +140,7 @@ final class MKBlockQueue:MKBlockQueueResponder
         if (mCurrentRunningBlockNumber == mNumOfBlocks)
         {
             mQueueIsRunning = false
-            mQueueCompletedBlockType?(dictionary:dictionary)
+            mQueueCompletedBlockType?(dictionary)
             return
         }
 
@@ -151,9 +149,9 @@ final class MKBlockQueue:MKBlockQueueResponder
         let blockIndex:Int = (mCurrentRunningBlockNumber - 1)
         let nextBlock:MKBlockQueueBlockType = mBlocksArray[blockIndex]
 
-        let blockQueueObserver:MKBlockQueueObserver = MKBlockQueueObserver(blockQueue:self)
+        let blockQueueObserver:MKBlockQueueObserver = MKBlockQueueObserver(with:self)
 
-        nextBlock(blockQueueObserver:blockQueueObserver, dictionary:&dictionary)
+        nextBlock(blockQueueObserver, &dictionary)
     }
 }
 

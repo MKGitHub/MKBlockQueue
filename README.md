@@ -12,8 +12,8 @@ MKBlockQueue allows you to create a chain of blocks and execute them one after t
 
 ![Image of MKBlockQueue](https://github.com/MKGitHub/MKBlockQueue/blob/master/MKBlockQueue.png)
 
-See the ViewController.swift for a simple example.
-![ViewController.swift](https://raw.githubusercontent.com/MKGitHub/MKBlockQueue/master/MKBlockQueue-Example-Project/ViewController.swift)
+See the `ViewController.swift` for a simple example of usage.
+https://raw.githubusercontent.com/MKGitHub/MKBlockQueue/swift3/MKBlockQueue-Example-Project/ViewController.swift
 
 
 Notes

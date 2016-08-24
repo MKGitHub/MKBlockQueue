@@ -1,12 +1,12 @@
-    //
-    //   Last Update: 23 Aug 2016
-    // Xcode Version: 8 beta 6 (8S201h)
-    // Swift Version: 3 beta 6
-    //
-    // https://developer.apple.com/library/mac/documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html
-    //
-    // https://pewpewthespells.com/blog/buildsettings.html
-    //
+//
+//   Last Update: 24 Aug 2016
+// Xcode Version: 8 beta 6 (8S201h)
+// Swift Version: 3 beta 6
+//
+// https://developer.apple.com/library/mac/documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html
+//
+// https://pewpewthespells.com/blog/buildsettings.html
+//
 
 
 ONLY_ACTIVE_ARCH = YES
@@ -116,9 +116,9 @@ GCC_WARN_UNDECLARED_SELECTOR = YES
 CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR
 
 
-    //
-    // Security: No Strip
-    //
+//
+// Security: No Strip
+//
 GENERATE_MASTER_OBJECT_FILE = NO
 
 DEPLOYMENT_POSTPROCESSING = NO

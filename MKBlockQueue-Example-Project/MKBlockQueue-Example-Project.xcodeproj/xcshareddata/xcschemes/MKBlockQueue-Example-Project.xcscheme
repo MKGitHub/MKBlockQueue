@@ -84,7 +84,7 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "YES"
-      debugDocumentVersioning = "YES">
+      debugDocumentVersioning = "NO">
       <BuildableProductRunnable
          runnableDebuggingMode = "0">
          <BuildableReference

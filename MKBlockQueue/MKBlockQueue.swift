@@ -112,7 +112,11 @@ final class MKBlockQueue:MKBlockQueueResponder
     ///
     func run(with dictionary:inout Dictionary<String, Any>)
     {
-        guard (mQueueIsRunning == false) else { fatalError("Queue is already running, can't start the queue again!") }
+        guard (mQueueIsRunning == false) else
+        {
+            print("Queue is already running, can't start the queue again!")
+            return
+        }
 
         mQueueIsRunning = true
 
@@ -134,7 +138,11 @@ final class MKBlockQueue:MKBlockQueueResponder
 
     fileprivate func runNextBlock(with dictionary:inout Dictionary<String, Any>)
     {
-        guard (mBlocksArray.count > 0) else { fatalError("There are no blocks in the queue to run!") }
+        guard (mBlocksArray.count > 0) else
+        {
+            print("There are no blocks in the queue to run!")
+            return
+        }
 
         // check if all block have been run
         if (mCurrentRunningBlockNumber == mNumOfBlocks)

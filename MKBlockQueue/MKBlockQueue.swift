@@ -94,14 +94,14 @@ final class MKBlockQueue:MKBlockQueueResponder
     // MARK:- Actions
 
 
-    func addBlock(_ blockQueueBlockType:MKBlockQueueBlockType)
+    func addBlock(_ blockQueueBlockType:@escaping MKBlockQueueBlockType)
     {
         mBlocksArray.append(blockQueueBlockType)
         mNumOfBlocks += 1
     }
 
 
-    func queueCompletedBlock(_ blockQueueCompletedBlockType:MKBlockQueueCompletedBlockType)
+    func queueCompletedBlock(_ blockQueueCompletedBlockType:@escaping MKBlockQueueCompletedBlockType)
     {
         mQueueCompletedBlockType = blockQueueCompletedBlockType
     }

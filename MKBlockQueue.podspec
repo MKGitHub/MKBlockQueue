@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MKBlockQueue"
-  s.version      = "1.0.1"
+  s.version      = "1.0.3"
   s.summary      = "MKBlockQueue allows you to create a chain of blocks and execute them one after the other in a queue."
 
   s.homepage     = "https://github.com/MKGitHub/MKBlockQueue"

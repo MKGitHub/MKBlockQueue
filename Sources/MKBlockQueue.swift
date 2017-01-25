@@ -1,6 +1,6 @@
 //
 //  MKBlockQueue
-//  Copyright © 2016 Mohsan Khan. All rights reserved.
+//  Copyright © 2016/2017 Mohsan Khan. All rights reserved.
 //
 
 //
@@ -10,7 +10,7 @@
 //
 
 //
-//  Copyright 2016 Mohsan Khan
+//  Copyright 2016/2017 Mohsan Khan
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -29,12 +29,17 @@ import Foundation
 
 
     ///
-    /// Observer class.
+    /// Observer class for handling the state of a block in a queue.
     ///
     final class MKBlockQueueObserver
     {
         fileprivate var mBlockQueueResponder:MKBlockQueueResponder!
 
+        ///
+        /// Init an observer.
+        ///
+        /// - Parameter blockQueue: The block queue.
+        ///
         init(with blockQueue:MKBlockQueue)
         {
             mBlockQueueResponder = blockQueue
@@ -46,6 +51,11 @@ import Foundation
             mBlockQueueResponder = nil
         }
 
+        ///
+        /// Tells the queue that this block has completed, and should continue to the next block in the queue.
+        ///
+        /// - Parameter dictionary: Dictionary for receiving and sending data between blocks.
+        ///
         func blockCompleted(with dictionary:inout Dictionary<String, Any>)
         {
             mBlockQueueResponder.blockCompletionTriggered(with:&dictionary)
@@ -70,7 +80,7 @@ import Foundation
 
 
 ///
-/// The block queue class.
+/// The main block queue class.
 ///
 final class MKBlockQueue:MKBlockQueueResponder
 {
@@ -85,6 +95,9 @@ final class MKBlockQueue:MKBlockQueueResponder
     // MARK:- Life Cycle
 
 
+    ///
+    /// Init a block queue.
+    ///
     init()
     {
         mBlocksArray = Array<MKBlockQueueBlockType>()
@@ -94,6 +107,11 @@ final class MKBlockQueue:MKBlockQueueResponder
     // MARK:- Actions
 
 
+    ///
+    /// Add a block to the queue.
+    ///
+    /// - Parameter blockQueueBlockType: A block type.
+    ///
     func addBlock(_ blockQueueBlockType:@escaping MKBlockQueueBlockType)
     {
         mBlocksArray.append(blockQueueBlockType)
@@ -101,6 +119,11 @@ final class MKBlockQueue:MKBlockQueueResponder
     }
 
 
+    ///
+    /// The completion block for the queue i.e. when all blocks have completed, this block is called at the end.
+    ///
+    /// - Parameter blockQueueCompletedBlockType: A completion block type.
+    ///
     func queueCompletedBlock(_ blockQueueCompletedBlockType:@escaping MKBlockQueueCompletedBlockType)
     {
         mQueueCompletedBlockType = blockQueueCompletedBlockType
@@ -108,7 +131,9 @@ final class MKBlockQueue:MKBlockQueueResponder
 
 
     ///
-    /// Run the first block with a dictionary.
+    /// Run a block using a dictionary.
+    ///
+    /// - Parameter dictionary: A dictionary with data provided to the block.
     ///
     func run(with dictionary:inout Dictionary<String, Any>)
     {

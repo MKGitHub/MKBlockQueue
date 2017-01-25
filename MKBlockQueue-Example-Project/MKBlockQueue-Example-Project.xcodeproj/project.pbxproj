@@ -7,8 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4DB582621D6CF694003B93BE /* MK_1_App_Development_RELEASE.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4DB582601D6CF694003B93BE /* MK_1_App_Development_RELEASE.xcconfig */; };
-		4DB582631D6CF694003B93BE /* MK_1_App_Development_DEBUG.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4DB582611D6CF694003B93BE /* MK_1_App_Development_DEBUG.xcconfig */; };
 		6637CA751E38F2E300E0D770 /* MKBlockQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6637CA741E38F2E300E0D770 /* MKBlockQueue.swift */; };
 		66BDB7A51D2A9E5000585D79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDB79E1D2A9E5000585D79 /* AppDelegate.swift */; };
 		66BDB7A61D2A9E5000585D79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66BDB79F1D2A9E5000585D79 /* Assets.xcassets */; };
@@ -106,7 +104,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0810;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Mohsan Khan";
 				TargetAttributes = {
 					666275A81C57A56F00459D7B = {
@@ -139,8 +137,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				66BDB7A61D2A9E5000585D79 /* Assets.xcassets in Resources */,
-				4DB582621D6CF694003B93BE /* MK_1_App_Development_RELEASE.xcconfig in Resources */,
-				4DB582631D6CF694003B93BE /* MK_1_App_Development_DEBUG.xcconfig in Resources */,
 				66BDB7A71D2A9E5000585D79 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

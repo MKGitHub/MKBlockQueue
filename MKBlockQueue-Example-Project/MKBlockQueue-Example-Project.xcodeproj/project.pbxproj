@@ -9,23 +9,23 @@
 /* Begin PBXBuildFile section */
 		4DB582621D6CF694003B93BE /* MK_1_App_Development_RELEASE.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4DB582601D6CF694003B93BE /* MK_1_App_Development_RELEASE.xcconfig */; };
 		4DB582631D6CF694003B93BE /* MK_1_App_Development_DEBUG.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4DB582611D6CF694003B93BE /* MK_1_App_Development_DEBUG.xcconfig */; };
+		6637CA751E38F2E300E0D770 /* MKBlockQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6637CA741E38F2E300E0D770 /* MKBlockQueue.swift */; };
 		66BDB7A51D2A9E5000585D79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDB79E1D2A9E5000585D79 /* AppDelegate.swift */; };
 		66BDB7A61D2A9E5000585D79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 66BDB79F1D2A9E5000585D79 /* Assets.xcassets */; };
 		66BDB7A71D2A9E5000585D79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66BDB7A11D2A9E5000585D79 /* Main.storyboard */; };
 		66BDB7A91D2A9E5000585D79 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDB7A41D2A9E5000585D79 /* ViewController.swift */; };
-		66BDB7AC1D2A9F7900585D79 /* MKBlockQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66BDB7AB1D2A9F7900585D79 /* MKBlockQueue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		4DB582601D6CF694003B93BE /* MK_1_App_Development_RELEASE.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MK_1_App_Development_RELEASE.xcconfig; sourceTree = "<group>"; };
 		4DB582611D6CF694003B93BE /* MK_1_App_Development_DEBUG.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = MK_1_App_Development_DEBUG.xcconfig; sourceTree = "<group>"; };
+		6637CA741E38F2E300E0D770 /* MKBlockQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKBlockQueue.swift; sourceTree = "<group>"; };
 		666275A91C57A56F00459D7B /* MKBlockQueue-Example-Project.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MKBlockQueue-Example-Project.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		66BDB79E1D2A9E5000585D79 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		66BDB79F1D2A9E5000585D79 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		66BDB7A21D2A9E5000585D79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Main.storyboard; sourceTree = "<group>"; };
 		66BDB7A31D2A9E5000585D79 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66BDB7A41D2A9E5000585D79 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		66BDB7AB1D2A9F7900585D79 /* MKBlockQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MKBlockQueue.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,17 +39,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6637CA731E38F2E300E0D770 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				6637CA741E38F2E300E0D770 /* MKBlockQueue.swift */,
+			);
+			name = Sources;
+			path = ../Sources;
+			sourceTree = "<group>";
+		};
 		666275A01C57A56F00459D7B = {
 			isa = PBXGroup;
 			children = (
 				4DB582611D6CF694003B93BE /* MK_1_App_Development_DEBUG.xcconfig */,
 				4DB582601D6CF694003B93BE /* MK_1_App_Development_RELEASE.xcconfig */,
-				66BDB7AA1D2A9F7900585D79 /* MKBlockQueue */,
-				66BDB79E1D2A9E5000585D79 /* AppDelegate.swift */,
-				66BDB7A41D2A9E5000585D79 /* ViewController.swift */,
 				66BDB7A31D2A9E5000585D79 /* Info.plist */,
 				66BDB79F1D2A9E5000585D79 /* Assets.xcassets */,
 				66BDB7A01D2A9E5000585D79 /* Base.lproj */,
+				66BDB79E1D2A9E5000585D79 /* AppDelegate.swift */,
+				66BDB7A41D2A9E5000585D79 /* ViewController.swift */,
+				6637CA731E38F2E300E0D770 /* Sources */,
 				666275AA1C57A56F00459D7B /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,15 +77,6 @@
 				66BDB7A11D2A9E5000585D79 /* Main.storyboard */,
 			);
 			path = Base.lproj;
-			sourceTree = "<group>";
-		};
-		66BDB7AA1D2A9F7900585D79 /* MKBlockQueue */ = {
-			isa = PBXGroup;
-			children = (
-				66BDB7AB1D2A9F7900585D79 /* MKBlockQueue.swift */,
-			);
-			name = MKBlockQueue;
-			path = ../MKBlockQueue;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,7 +152,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				66BDB7AC1D2A9F7900585D79 /* MKBlockQueue.swift in Sources */,
+				6637CA751E38F2E300E0D770 /* MKBlockQueue.swift in Sources */,
 				66BDB7A91D2A9E5000585D79 /* ViewController.swift in Sources */,
 				66BDB7A51D2A9E5000585D79 /* AppDelegate.swift in Sources */,
 			);
@@ -176,9 +176,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4DB582611D6CF694003B93BE /* MK_1_App_Development_DEBUG.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_ENABLE_DEBUG_INFO = YES;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -187,9 +185,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 4DB582601D6CF694003B93BE /* MK_1_App_Development_RELEASE.xcconfig */;
 			buildSettings = {
-				ENABLE_BITCODE = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 			};
 			name = Release;

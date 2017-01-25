@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "MKBlockQueue"
-  s.version      = "1.0.3"
+  s.version      = "1.0.4"
   s.summary      = "MKBlockQueue allows you to create a chain of blocks and execute them one after the other in a queue."
 
   s.homepage     = "https://github.com/MKGitHub/MKBlockQueue"
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 
   s.source       = { :git => "https://github.com/MKGitHub/MKBlockQueue.git", :tag => "#{s.version}" }
 
-  s.source_files = "MKBlockQueue/", "MKBlockQueue.swift"
+  s.source_files = "Sources/MKBlockQueue.swift"
 
   s.requires_arc = true
 

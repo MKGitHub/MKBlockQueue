@@ -10,6 +10,9 @@
 [![Swift](https://img.shields.io/badge/Swift Version-3.0.1-blue.svg)](https://github.com/MKGitHub/MKBlockQueue)
 
 
+★ Give this repo a star and help its development grow! ★
+
+
 MKBlockQueue
 ------
 MKBlockQueue allows you to create a chain of blocks and execute them one after the other in a queue. Compared with `NSOperation`, with MKBlockQueue you decide yourself when a block is complete and when you want the queue to continue. You can also pass data from one block to the next.

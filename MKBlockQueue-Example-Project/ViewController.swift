@@ -28,7 +28,7 @@
 import Cocoa
 
 
-class ViewController:NSViewController
+final class ViewController:NSViewController
 {
     // MARK:- Life Cycle
 
@@ -64,7 +64,6 @@ class ViewController:NSViewController
 
             // tell this block is now completed
             blockQueueObserver.blockCompleted(with:&dictionary)
-
         }
 
 

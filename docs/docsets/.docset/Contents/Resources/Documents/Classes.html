@@ -10,10 +10,11 @@
     
   </head>
   <body>
+    <a name="//apple_ref/swift/Section/Classes" class="dashAnchor"></a>
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html"> Docs</a> (90% documented)</p>
+        <p><a href="index.html"> Docs</a> (100% documented)</p>
       </div>
     </header>
     <div class="content-wrapper">
@@ -32,16 +33,22 @@
               <li class="nav-group-task">
                 <a href="Classes/MKBlockQueue.html">MKBlockQueue</a>
               </li>
-              <li class="nav-group-task">
-                <a href="Classes/MKBlockQueueObserver.html">MKBlockQueueObserver</a>
-              </li>
             </ul>
           </li>
           <li class="nav-group-name">
-            <a href="Typealiases.html">Typealiases</a>
+            <a href="Typealiases.html">Type Aliases</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
-                <a href="Typealiases.html#/s:12MKBlockQueue21MKBlockQueueBlockType">MKBlockQueueBlockType</a>
+                <a href="Typealiases.html#/s:12MKBlockQueue22MKBQBCompletionHandlera">MKBQBCompletionHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:12MKBlockQueue9MKBQBlocka">MKBQBlock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:12MKBlockQueue23MKBQCBCompletionHandlera">MKBQCBCompletionHandler</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Typealiases.html#/s:12MKBlockQueue19MKBQCompletionBlocka">MKBQCompletionBlock</a>
               </li>
             </ul>
           </li>
@@ -60,37 +67,9 @@
                 <li class="item">
                   <div>
                     <code>
-                    <a name="/s:C12MKBlockQueue20MKBlockQueueObserver"></a>
-                    <a name="//apple_ref/swift/Class/MKBlockQueueObserver" class="dashAnchor"></a>
-                    <a class="token" href="#/s:C12MKBlockQueue20MKBlockQueueObserver">MKBlockQueueObserver</a>
-                    </code>
-                  </div>
-                  <div class="height-container">
-                    <div class="pointer-container"></div>
-                    <section class="section">
-                      <div class="pointer"></div>
-                      <div class="abstract">
-                        <p>Observer class for handling the state of a block in a queue.</p>
-
-                        <a href="Classes/MKBlockQueueObserver.html" class="slightly-smaller">See more</a>
-                      </div>
-                      <div class="declaration">
-                        <h4>Declaration</h4>
-                        <div class="language">
-                          <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">MKBlockQueueObserver</span></code></pre>
-
-                        </div>
-                      </div>
-                    </section>
-                  </div>
-                </li>
-                <li class="item">
-                  <div>
-                    <code>
-                    <a name="/s:C12MKBlockQueue12MKBlockQueue"></a>
+                    <a name="/s:12MKBlockQueueAAC"></a>
                     <a name="//apple_ref/swift/Class/MKBlockQueue" class="dashAnchor"></a>
-                    <a class="token" href="#/s:C12MKBlockQueue12MKBlockQueue">MKBlockQueue</a>
+                    <a class="token" href="#/s:12MKBlockQueueAAC">MKBlockQueue</a>
                     </code>
                   </div>
                   <div class="height-container">
@@ -98,7 +77,8 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>The main block queue class.</p>
+                        <p>The main block queue class.
+We use a <code>class</code> so we don&rsquo;t need to mutate it like a <code>struct</code>, when passing it around.</p>
 
                         <a href="Classes/MKBlockQueue.html" class="slightly-smaller">See more</a>
                       </div>
@@ -106,7 +86,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">MKBlockQueue</span><span class="p">:</span><span class="kt">MKBlockQueueResponder</span></code></pre>
+                          <pre class="highlight swift"><code><span class="kd">final</span> <span class="kd">class</span> <span class="kt">MKBlockQueue</span></code></pre>
 
                         </div>
                       </div>
@@ -118,8 +98,8 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="" target="_blank" rel="external">Mohsan Khan</a>. All rights reserved. (Last updated: 2017-01-25)</p>
-          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.7.3</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+          <p>&copy; 2018 <a class="link" href="" target="_blank" rel="external">Mohsan Khan</a>. All rights reserved. (Last updated: 2018-10-28)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.9.3</a>, a <a class="link" href="https://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>
     </div>

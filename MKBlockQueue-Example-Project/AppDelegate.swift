@@ -1,16 +1,15 @@
 //
 //  MKBlockQueue - Example Project
-//  Copyright © 2016/2017 Mohsan Khan. All rights reserved.
+//  Copyright © 2016/2017/2018 Mohsan Khan. All rights reserved.
 //
 
 //
 //  https://github.com/MKGitHub/MKBlockQueue
 //  http://www.xybernic.com
-//  http://www.khanofsweden.com
 //
 
 //
-//  Copyright 2016/2017 Mohsan Khan
+//  Copyright 2016/2017/2018 Mohsan Khan
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.

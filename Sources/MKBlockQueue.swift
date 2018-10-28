@@ -1,16 +1,15 @@
 //
 //  MKBlockQueue
-//  Copyright © 2016/2017 Mohsan Khan. All rights reserved.
+//  Copyright © 2016/2017/2018 Mohsan Khan. All rights reserved.
 //
 
 //
 //  https://github.com/MKGitHub/MKBlockQueue
 //  http://www.xybernic.com
-//  http://www.khanofsweden.com
 //
 
 //
-//  Copyright 2016/2017 Mohsan Khan
+//  Copyright 2016/2017/2018 Mohsan Khan
 //
 //  Licensed under the Apache License, Version 2.0 (the "License");
 //  you may not use this file except in compliance with the License.
@@ -28,163 +27,175 @@
 import Foundation
 
 
-    ///
-    /// Observer class for handling the state of a block in a queue.
-    ///
-    final class MKBlockQueueObserver
-    {
-        fileprivate var mBlockQueueResponder:MKBlockQueueResponder!
-
-        ///
-        /// Init an observer.
-        ///
-        /// - Parameter blockQueue: The block queue.
-        ///
-        init(with blockQueue:MKBlockQueue)
-        {
-            mBlockQueueResponder = blockQueue
-        }
-
-        deinit
-        {
-            // disconnect reference in hold
-            mBlockQueueResponder = nil
-        }
-
-        ///
-        /// Tells the queue that this block has completed, and should continue to the next block in the queue.
-        ///
-        /// - Parameter dictionary: Dictionary for receiving and sending data between blocks.
-        ///
-        func blockCompleted(with dictionary:inout Dictionary<String, Any>)
-        {
-            mBlockQueueResponder.blockCompletionTriggered(with:&dictionary)
-        }
-    }
+/*
+    `@escaping` allows the `completionHandler` to be called after the block has finished executing i.e. at a later point.
+*/
 
 
-    ///
-    /// Type aliases.
-    ///
-    typealias MKBlockQueueBlockType = (_ blockQueueObserver:MKBlockQueueObserver, _ dictionary:inout Dictionary<String, Any>) -> Void
-    typealias MKBlockQueueCompletedBlockType = (_ dictionary:Dictionary<String, Any>) -> Void
+/// A block type.
+typealias MKBQBlock = (_ completionHandler:@escaping MKBQBCompletionHandler, _ dictionary:inout [String:Any]) -> Void
+/// A block types completion handler.
+typealias MKBQBCompletionHandler = (_ dictionary:inout [String:Any]) -> Void
+
+/// A completion block type.
+typealias MKBQCompletionBlock = (_ completionHandler:@escaping MKBQCBCompletionHandler, _ dictionary:inout [String:Any]) -> Void
+/// A completion block types completion handler.
+typealias MKBQCBCompletionHandler = () -> Void
 
 
-    ///
-    /// Responder protocol.
-    ///
-    fileprivate protocol MKBlockQueueResponder:class
-    {
-        func blockCompletionTriggered(with dictionary:inout Dictionary<String, Any>)
-    }
-
-
-///
-/// The main block queue class.
-///
-final class MKBlockQueue:MKBlockQueueResponder
+/**
+    The main block queue class.
+    We use a `class` so we don't need to mutate it like a `struct`, when passing it around.
+*/
+final class MKBlockQueue
 {
-    fileprivate var mNumOfBlocks:Int = 0
-    fileprivate var mCurrentRunningBlockNumber:Int = 0
-    fileprivate var mQueueIsRunning:Bool = false
+    // MARK: Private Members
 
-    fileprivate var mBlocksArray:Array<MKBlockQueueBlockType>!
-    fileprivate var mQueueCompletedBlockType:MKBlockQueueCompletedBlockType?
+    private var mCurrentRunningBlockIndex:Int? = nil
+    private var mQueueIsRunning:Bool = false
+    private var mBlocksArray:[MKBQBlock]!
+    private var mQueueCompletionBlock:MKBQCompletionBlock?
 
 
     // MARK:- Life Cycle
 
 
-    ///
-    /// Init a block queue.
-    ///
-    init()
+    /**
+        Init a `MKBlockQueue`.
+
+        - Parameters:
+            - onCompletion: The completion block for the queue i.e. when all blocks have completed, this block is called at the end.
+     */
+    init(onCompletion newCompletionBlock:MKBQCompletionBlock?=nil)
     {
-        mBlocksArray = Array<MKBlockQueueBlockType>()
+        log("Queue init.")
+
+        mBlocksArray = [MKBQBlock]()
+        mQueueCompletionBlock = newCompletionBlock
     }
+
+
+    /*deinit
+    {
+        log("Queue deinit.")
+    }*/
 
 
     // MARK:- Actions
 
 
-    ///
-    /// Add a block to the queue.
-    ///
-    /// - Parameter blockQueueBlockType: A block type.
-    ///
-    func addBlock(_ blockQueueBlockType:@escaping MKBlockQueueBlockType)
+    /**
+        Add a block to the queue.
+
+        - Parameters:
+            - newBlock: A block type.
+    */
+    func addBlock(_ newBlock:@escaping MKBQBlock)
     {
-        mBlocksArray.append(blockQueueBlockType)
-        mNumOfBlocks += 1
+        log("Queue add new block.")
+
+        mBlocksArray.append(newBlock)
     }
 
 
-    ///
-    /// The completion block for the queue i.e. when all blocks have completed, this block is called at the end.
-    ///
-    /// - Parameter blockQueueCompletedBlockType: A completion block type.
-    ///
-    func queueCompletedBlock(_ blockQueueCompletedBlockType:@escaping MKBlockQueueCompletedBlockType)
-    {
-        mQueueCompletedBlockType = blockQueueCompletedBlockType
-    }
+    /**
+        Run queue from the beginning.
 
+        - Parameters:
+            - newDictionary: A dictionary for receiving & sending data between blocks.
 
-    ///
-    /// Run a block using a dictionary.
-    ///
-    /// - Parameter dictionary: A dictionary with data provided to the block.
-    ///
-    func run(with dictionary:inout Dictionary<String, Any>)
+        - Returns: ´true´ if queue was started. ´false´ queue did not start.
+    */
+    @discardableResult
+    func runWithDictionary(_ newDictionary:inout [String:Any]) -> Bool
     {
-        guard (mQueueIsRunning == false) else
+        guard (mBlocksArray.count > 0) else
         {
-            print("Queue is already running, can't start the queue again!")
-            return
+            log("There are no blocks in the queue to run!")
+            return false
         }
 
-        mQueueIsRunning = true
+        guard (mQueueIsRunning == false) else
+        {
+            log("Queue is already running!")
+            return false
+        }
 
-        runNextBlock(with:&dictionary)
-    }
+        continueWithDictionary(&newDictionary)
 
-
-    // MARK:- MKBlockQueueResponder
-
-
-    fileprivate func blockCompletionTriggered(with dictionary:inout Dictionary<String, Any>)
-    {
-        runNextBlock(with:&dictionary)
+        return true
     }
 
 
     // MARK:- Private
 
 
-    fileprivate func runNextBlock(with dictionary:inout Dictionary<String, Any>)
+    /**
+        Continue and run the next block in queue.
+
+        - Parameters:
+            - newDictionary: A dictionary for receiving & sending data between blocks.
+    */
+    private func continueWithDictionary(_ newDictionary:inout [String:Any])
     {
-        guard (mBlocksArray.count > 0) else
-        {
-            print("There are no blocks in the queue to run!")
-            return
-        }
-
         // check if all block have been run
-        if (mCurrentRunningBlockNumber == mNumOfBlocks)
+        // end the queue
+        if (mCurrentRunningBlockIndex == (mBlocksArray.count - 1))
         {
-            mQueueIsRunning = false
-            mQueueCompletedBlockType?(dictionary)
+            log("Queue has run all its blocks.")
+
+            // if there is a completion block, call it
+            if let queueCompletionBlock = mQueueCompletionBlock
+            {
+                queueCompletionBlock(
+                {
+                    [weak self] in
+                    guard let self = self else { fatalError("`self` does not exist anymore!") }
+
+                    self.mQueueIsRunning = false
+                },
+                &newDictionary)
+            }
+            else
+            {
+                mQueueIsRunning = false
+            }
+
             return
         }
 
-        mCurrentRunningBlockNumber += 1
+        //
 
-        let blockIndex:Int = (mCurrentRunningBlockNumber - 1)
-        let nextBlock:MKBlockQueueBlockType = mBlocksArray[blockIndex]
+        // start queue
+        if (mCurrentRunningBlockIndex == nil)
+        {
+            mCurrentRunningBlockIndex = 0    // first iteration
+            mQueueIsRunning = true
+        }
+        else
+        {
+            mCurrentRunningBlockIndex! += 1    // next iterations
+        }
 
-        let blockQueueObserver:MKBlockQueueObserver = MKBlockQueueObserver(with:self)
+        log("Queue will run block #: \(mCurrentRunningBlockIndex!) of \(mBlocksArray.count - 1)")
 
-        nextBlock(blockQueueObserver, &dictionary)
+        let blockAtIndex:MKBQBlock = mBlocksArray[mCurrentRunningBlockIndex!]
+
+        blockAtIndex(
+        {
+            [weak self] (dictionary:inout [String:Any]) in
+            guard let self = self else { fatalError("`self` does not exist anymore!") }
+
+            self.continueWithDictionary(&dictionary)
+        },
+        &newDictionary)
+    }
+
+
+    private func log(_ newMessage:String)
+    {
+        // disabled by default
+        //print("📦 \(newMessage)")
     }
 }
 
